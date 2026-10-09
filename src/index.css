@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+/* Custom Color Theme Tokens */
+:root {
+  --color-emerald: #006B3C;
+  --color-dark-green: #00452D;
+  --color-bright-green: #13B968;
+  --color-gold: #FFC928;
+  --color-mint: #E8FFF4;
+  --color-main-text: #132238;
+  --color-sec-text: #64748B;
+  --color-borders: #D7F3E5;
+  --color-error: #DC2626;
+}
+
+/* Custom Utilities */
+.bg-emerald-brand { background-color: #006B3C; }
+.bg-dark-green { background-color: #00452D; }
+.bg-bright-green { background-color: #13B968; }
+.bg-gold-brand { background-color: #FFC928; }
+.bg-mint-brand { background-color: #E8FFF4; }
+
+.text-emerald-brand { color: #006B3C; }
+.text-dark-green { color: #00452D; }
+.text-bright-green { color: #13B968; }
+.text-gold-brand { color: #FFC928; }
+.text-main-dark { color: #132238; }
+
+.border-mint-brand { border-color: #D7F3E5; }
+
+/* Hide scrollbars for clean UI while keeping scrollability */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Print Stylesheet for Lottery Tickets */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .printable-ticket, .printable-ticket * {
+    visibility: visible;
+  }
+  .printable-ticket {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+

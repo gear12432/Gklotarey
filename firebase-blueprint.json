@@ -1,0 +1,88 @@
+{
+  "entities": {
+    "user": {
+      "title": "User Profile",
+      "description": "User profile with persistent wallet balance and VIP level",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "photoURL": { "type": "string", "maxLength": 500 },
+        "walletBalance": { "type": "number" },
+        "vipLevel": { "type": "number" },
+        "lastCheckInDate": { "type": "string", "maxLength": 50 },
+        "checkInStreak": { "type": "number" },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["uid", "email", "walletBalance"]
+    },
+    "lotteryTicket": {
+      "title": "Lottery Ticket",
+      "description": "User purchased or claimed lottery ticket",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "drawId": { "type": "string", "maxLength": 128 },
+        "drawTitle": { "type": "string", "maxLength": 150 },
+        "ticketCode": { "type": "string", "maxLength": 50 },
+        "price": { "type": "number" },
+        "quantity": { "type": "number" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "maxLength": 30 },
+        "isWinner": { "type": "boolean" },
+        "prizeWon": { "type": "string", "maxLength": 100 },
+        "purchaseDate": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "userId", "drawId", "ticketCode", "price", "status"]
+    },
+    "transaction": {
+      "title": "Wallet Transaction",
+      "description": "Deposit, ticket purchase or reward transaction",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "type": { "type": "string", "maxLength": 50 },
+        "amount": { "type": "number" },
+        "description": { "type": "string", "maxLength": 200 },
+        "paymentMethod": { "type": "string", "maxLength": 50 },
+        "status": { "type": "string", "maxLength": 30 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "userId", "type", "amount", "status"]
+    },
+    "winnerAnnouncement": {
+      "title": "Winner Announcement",
+      "description": "Live recent winner ticker item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userMasked": { "type": "string", "maxLength": 50 },
+        "amount": { "type": "string", "maxLength": 50 },
+        "gameName": { "type": "string", "maxLength": 100 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["id", "userMasked", "amount", "gameName"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/user" },
+      "description": "User profile collection"
+    },
+    "/users/{userId}/tickets/{ticketId}": {
+      "schema": { "$ref": "#/entities/lotteryTicket" },
+      "description": "User tickets subcollection"
+    },
+    "/users/{userId}/transactions/{txnId}": {
+      "schema": { "$ref": "#/entities/transaction" },
+      "description": "User wallet transactions subcollection"
+    },
+    "/winners/{winnerId}": {
+      "schema": { "$ref": "#/entities/winnerAnnouncement" },
+      "description": "Global recent winner ticker list"
+    }
+  }
+}

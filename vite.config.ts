@@ -5,7 +5,8 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: './', // Relative base path ensures scripts and CSS load on GitHub Pages subpaths
+    // Configures '/Gklotarey/' for GitHub Pages deployment and './' for local/relative preview
+    base: process.env.GITHUB_ACTIONS === 'true' ? '/Gklotarey/' : './',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

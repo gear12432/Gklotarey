@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 export default defineConfig(() => {
   return {
     // Relative base './' ensures assets load correctly regardless of repository name or GitHub Pages subpath
-    base: process.env.GITHUB_ACTIONS === 'true' ? '/Gklotarey/' : './',
+    base: './',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

@@ -3,10 +3,10 @@ import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 
-export default defineConfig(() => {
+export default defineConfig(({ command }) => {
   return {
-    // Relative base './' ensures assets load correctly regardless of repository name or GitHub Pages subpath
-    base: './',
+    // Absolute base '/Gklotarey/' ensures assets load correctly on GitHub Pages (https://gear12432.github.io/Gklotarey/)
+    base: command === 'build' ? '/Gklotarey/' : '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

@@ -3,19 +3,17 @@ import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 
-export default defineConfig(({ command }) => {
-  return {
-    // Absolute base '/Gklotarey/' ensures assets load correctly on GitHub Pages (https://gear12432.github.io/Gklotarey/)
-    base: command === 'build' ? '/Gklotarey/' : '/',
-    plugins: [react(), tailwindcss()],
-    resolve: {
-      alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url)),
-      },
+export default defineConfig({
+  // Relative base './' ensures assets load correctly on GitHub Pages regardless of repository URL casing or subpath
+  base: './',
+  plugins: [react(), tailwindcss()],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
-    server: {
-      hmr: process.env.DISABLE_HMR !== 'true',
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
-    },
-  };
+  },
+  server: {
+    hmr: process.env.DISABLE_HMR !== 'true',
+    watch: process.env.DISABLE_HMR === 'true' ? null : {},
+  },
 });

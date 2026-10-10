@@ -12,7 +12,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, showHom
   const navigate = useNavigate();
 
   return (
-    <header className="sticky top-0 z-30 bg-gradient-to-r from-[#C02626] via-[#991B1B] to-[#C02626] text-white shadow-md">
+    <header className="sticky top-0 z-30 bg-gradient-to-r from-[#00452D] via-[#006B3C] to-[#00452D] text-white shadow-md border-b border-[#13B968]/30">
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
           <button
@@ -20,7 +20,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, showHom
             className="p-1.5 rounded-full text-white/90 hover:text-white hover:bg-white/10 transition-colors"
             aria-label="Go back"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-6 h-6 text-[#FFC928]" />
           </button>
           <div className="min-w-0">
             <h1 className="font-heading font-extrabold text-base sm:text-lg text-white truncate leading-tight">
@@ -40,7 +40,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({ title, subtitle, showHom
             className="p-2 rounded-full text-white/90 hover:text-white hover:bg-white/10 transition-colors shrink-0"
             aria-label="Home"
           >
-            <Home className="w-5 h-5" />
+            <Home className="w-5 h-5 text-[#FFC928]" />
           </button>
         )}
       </div>

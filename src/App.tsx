@@ -56,10 +56,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       return (
         <div className="min-h-screen bg-[#F4FAF6] text-[#132238] flex flex-col items-center justify-center p-6 text-center">
           <div className="bg-white rounded-3xl p-6 border border-[#D7F3E5] shadow-lg max-w-md w-full space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#C02626] text-white flex items-center justify-center font-black text-xl mx-auto shadow-sm">
-              KL
+            <div className="w-12 h-12 rounded-2xl bg-[#006B3C] text-[#FFC928] flex items-center justify-center font-black text-xl mx-auto shadow-sm">
+              GV
             </div>
-            <h1 className="font-heading font-black text-xl text-[#132238]">Kerala Lottery Live</h1>
+            <h1 className="font-heading font-black text-xl text-[#132238]">Great View Lottery</h1>
             <p className="text-xs text-[#64748B]">
               An unexpected error occurred while loading the page.
             </p>
@@ -68,7 +68,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
                 this.setState({ hasError: false, error: null });
                 window.location.href = window.location.pathname;
               }}
-              className="w-full bg-[#C02626] hover:bg-[#991B1B] text-white font-bold py-3 px-4 rounded-xl text-xs shadow-md transition-colors"
+              className="w-full bg-[#006B3C] hover:bg-[#00452D] text-white font-bold py-3 px-4 rounded-xl text-xs shadow-md transition-colors"
             >
               Reload Application
             </button>
@@ -85,7 +85,7 @@ export default function App() {
   return (
     <ErrorBoundary>
       <DemoProvider>
-        {/* HashRouter ensures 100% routing support on GitHub Pages and static hosts without 404 blank screens */}
+        {/* HashRouter ensures 100% routing support on static hosts without 404 blank screens */}
         <HashRouter>
           <Toast />
           <Routes>

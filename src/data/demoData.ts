@@ -6,83 +6,83 @@ import {
 
 export const keralaStateDraws: KeralaLotteryDraw[] = [
   {
-    id: 'DRAW-KR771',
-    code: 'KR-771',
-    title: 'KARUNYA KR-771',
+    id: 'DRAW-GV881',
+    code: 'GV-881',
+    title: 'GREAT VIEW MEGA BUMPER (GV-881)',
     category: 'Weekly Bumper',
-    ticketPrice: 40,
-    jackpotPrize: '₹ 100 Lakhs',
-    prizeDescription: '1st Prize ₹1 Crore + 10 x ₹10 Lakhs Runner Ups',
-    closingTimeStr: '15 hrs 54 mins',
+    ticketPrice: 50,
+    jackpotPrize: '₹ 25 Crores',
+    prizeDescription: '1st Prize ₹25 Crores + 10 x ₹1 Crore Runner-Up Prizes',
+    closingTimeStr: '12 hrs 30 mins',
     drawDate: '2026-10-10 15:00:00',
     status: 'open',
     totalTickets: 100000,
-    ticketsSold: 78200,
-    bannerGradient: 'from-[#006B3C] via-[#00452D] to-[#13B968]',
-    badgeTag: '₹40'
+    ticketsSold: 84200,
+    bannerGradient: 'from-[#00452D] via-[#006B3C] to-[#13B968]',
+    badgeTag: '₹50 BUMPER'
   },
   {
-    id: 'DRAW-OA158',
-    code: 'OA-158',
-    title: 'ONLINE-ONLY OA-158',
+    id: 'DRAW-GVE158',
+    code: 'GV-158',
+    title: 'GREAT VIEW DIGITAL EXPRESS (GV-158)',
     category: 'Digital Express',
     ticketPrice: 40,
-    jackpotPrize: '₹ 120 Lakhs',
-    prizeDescription: '1st Prize ₹1.2 Crore Exclusive Online Draw',
-    closingTimeStr: '21 hrs 54 mins',
+    jackpotPrize: '₹ 10 Crores',
+    prizeDescription: '1st Prize ₹10 Crores Exclusive Digital View Draw',
+    closingTimeStr: '18 hrs 45 mins',
     drawDate: '2026-10-10 20:00:00',
     status: 'open',
     totalTickets: 80000,
-    ticketsSold: 64100,
-    bannerGradient: 'from-[#C02626] via-[#991B1B] to-[#DC2626]',
+    ticketsSold: 67100,
+    bannerGradient: 'from-[#006B3C] via-[#00452D] to-[#FFC928]',
     badgeTag: '₹40',
     isOnlineOnly: true
   },
   {
-    id: 'DRAW-SM76',
-    code: 'SM-76',
-    title: 'Samrudhi SM-76',
+    id: 'DRAW-GVS76',
+    code: 'GV-76',
+    title: 'GREAT VIEW SAMRUDHI GOLD (GV-76)',
     category: 'Weekly Gold',
     ticketPrice: 40,
-    jackpotPrize: '₹ 100 Lakhs',
-    prizeDescription: '1st Prize ₹1 Crore + 50 Gold Vouchers',
-    closingTimeStr: '1 days 15 hrs',
+    jackpotPrize: '₹ 5 Crores',
+    prizeDescription: '1st Prize ₹5 Crores + 100 Guaranteed Gold Coins',
+    closingTimeStr: '1 day 14 hrs',
     drawDate: '2026-10-11 15:00:00',
     status: 'open',
     totalTickets: 90000,
-    ticketsSold: 52000,
+    ticketsSold: 58000,
     bannerGradient: 'from-[#D97706] via-[#B45309] to-[#F59E0B]',
     badgeTag: '₹40'
   },
   {
-    id: 'DRAW-NR390',
-    code: 'NR-390',
-    title: 'NIRMAL NR-390',
+    id: 'DRAW-GVN390',
+    code: 'GV-390',
+    title: 'FORTUNE VIEW SPECIAL (GV-390)',
     category: 'Friday Special',
     ticketPrice: 40,
-    jackpotPrize: '₹ 70 Lakhs',
-    prizeDescription: '1st Prize ₹70 Lakhs + Guaranteed Secondary Payouts',
-    closingTimeStr: '2 days 10 hrs',
+    jackpotPrize: '₹ 2 Crores',
+    prizeDescription: '1st Prize ₹2 Crores + Guaranteed Secondary Payouts',
+    closingTimeStr: '2 days 08 hrs',
     drawDate: '2026-10-12 15:00:00',
     status: 'open',
     totalTickets: 75000,
-    ticketsSold: 39000,
+    ticketsSold: 41000,
     bannerGradient: 'from-[#2563EB] via-[#1D4ED8] to-[#3B82F6]',
     badgeTag: '₹40'
   },
   {
-    id: 'DRAW-FF102',
-    code: 'FF-102',
-    title: 'FIFTY-FIFTY FF-102',
+    id: 'DRAW-GVF102',
+    code: 'GV-102',
+    title: 'GREAT VIEW FIFTY-FIFTY (GV-102)',
     category: 'Super Bumper',
     ticketPrice: 50,
     jackpotPrize: '₹ 1 Crore',
     prizeDescription: '1st Prize ₹1 Crore Jackpot + Fast Daily Settlement',
-    closingTimeStr: '3 days 12 hrs',
+    closingTimeStr: '3 days 10 hrs',
     drawDate: '2026-10-13 15:00:00',
     status: 'open',
     totalTickets: 120000,
-    ticketsSold: 88000,
+    ticketsSold: 91000,
     bannerGradient: 'from-[#059669] via-[#047857] to-[#10B981]',
     badgeTag: '₹50'
   }
@@ -91,7 +91,7 @@ export const keralaStateDraws: KeralaLotteryDraw[] = [
 export const mostPopularGames = [
   {
     id: 'POP-1',
-    title: '500 FORTUNE GARUD',
+    title: '500 FORTUNE GARUDA',
     subtitle: 'Golden Garuda Divine Jackpot',
     multiply: '500X',
     tag: 'HOT PLAY',
@@ -113,26 +113,26 @@ export const mostPopularGames = [
     subtitle: 'Live First Person Roulette Wheel',
     multiply: '2000X',
     tag: 'LIVE CASINO',
-    imageBg: 'from-[#7F1D1D] via-[#450A0A] to-[#EF4444]',
+    imageBg: 'from-[#00452D] via-[#006B3C] to-[#13B968]',
     icon: '🎰'
   }
 ];
 
 export const liveWinnerTicker: WinnerAnnouncement[] = [
-  { id: '1', userMasked: 'User 735****899', amount: '₹1,100', gameName: 'Matka', timestamp: '1 min ago' },
-  { id: '2', userMasked: 'User 982****410', amount: '₹10,000', gameName: 'Karunya KR-771', timestamp: '3 mins ago' },
-  { id: '3', userMasked: 'User 621****112', amount: '₹5,000', gameName: 'Lucky Spin', timestamp: '5 mins ago' },
-  { id: '4', userMasked: 'User 884****092', amount: '₹1,20,000', gameName: 'Online-Only OA-158', timestamp: '8 mins ago' },
+  { id: '1', userMasked: 'User 735****899', amount: '₹25,00,000', gameName: 'Great View Mega Bumper (GV-881)', timestamp: '1 min ago' },
+  { id: '2', userMasked: 'User 982****410', amount: '₹5,00,000', gameName: 'Great View Digital Express (GV-158)', timestamp: '3 mins ago' },
+  { id: '3', userMasked: 'User 621****112', amount: '₹50,000', gameName: 'Lucky Spin', timestamp: '5 mins ago' },
+  { id: '4', userMasked: 'User 884****092', amount: '₹1,00,000', gameName: 'Fortune View Special (GV-390)', timestamp: '8 mins ago' },
   { id: '5', userMasked: 'User 551****801', amount: '₹2,500', gameName: 'Daily Check-In', timestamp: '12 mins ago' }
 ];
 
 export const initialRewardOffers: RewardOffer[] = [
   {
     id: 'OFFER-1',
-    title: 'Free Kerala Ticket Weekly',
-    description: 'VIP 1 players receive 1 Free Kerala State Lottery ticket every week!',
-    bonusAmount: 40,
-    code: 'FREEKERALA',
+    title: 'Free Great View Ticket Weekly',
+    description: 'VIP 1 players receive 1 Free Great View Lottery ticket every week!',
+    bonusAmount: 50,
+    code: 'FREEGREATVIEW',
     expiryDate: 'Expires in 00:08:57',
     claimed: false,
     conditions: 'Claimable once per week for active demo users.',
@@ -143,7 +143,7 @@ export const initialRewardOffers: RewardOffer[] = [
     title: 'Welcome First Deposit Bonus',
     description: 'Get ₹500 Instant Extra Wallet Credit when adding ₹100 or more!',
     bonusAmount: 500,
-    code: 'KERALAWELCOME',
+    code: 'GREATVIEW500',
     expiryDate: '2026-10-31',
     claimed: false,
     conditions: 'Applies on first deposit.',
@@ -153,8 +153,8 @@ export const initialRewardOffers: RewardOffer[] = [
 
 export const faqList = [
   {
-    q: 'What is Kerala Lottery Live?',
-    a: 'Kerala Lottery Live is a digital platform designed for Kerala State Lotteries online draw details, daily check-in rewards, and ticket management.'
+    q: 'What is Great View Lottery?',
+    a: 'Great View Lottery is a digital lottery customer application featuring live bumper draws, ticket selection, daily check-in rewards, and instant demo wallet credit.'
   },
   {
     q: 'How does Firebase Authentication work?',

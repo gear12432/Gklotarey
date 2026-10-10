@@ -10,18 +10,18 @@ import {
   Wallet,
   Clock,
   ArrowRight,
-  ChevronRight,
-  Ticket,
-  User,
   LogOut,
   ShieldCheck,
   CheckCircle2,
-  Lock
+  Menu,
+  Zap,
+  Gift
 } from 'lucide-react';
 import { useDemo } from '../context/DemoContext';
 import { CheckInModal } from '../components/CheckInModal';
 import { LuckySpinModal } from '../components/LuckySpinModal';
 import { FloatingDepositButton } from '../components/FloatingDepositButton';
+import { SideDrawer } from '../components/SideDrawer';
 
 export const HomeScreen: React.FC = () => {
   const navigate = useNavigate();
@@ -39,9 +39,10 @@ export const HomeScreen: React.FC = () => {
 
   const [isCheckInOpen, setIsCheckInOpen] = useState(false);
   const [isLuckySpinOpen, setIsLuckySpinOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [tickerIndex, setTickerIndex] = useState(0);
 
-  // Rotate winner ticker
+  // Rotate live winner ticker smoothly
   useEffect(() => {
     const timer = setInterval(() => {
       setTickerIndex((prev) => (prev + 1) % winnersTicker.length);
@@ -52,26 +53,31 @@ export const HomeScreen: React.FC = () => {
   const currentWinner = winnersTicker[tickerIndex];
 
   return (
-    <div className="min-h-screen bg-[#F4FAF6] text-[#132238] flex flex-col pb-20 select-none">
+    <div className="min-h-screen bg-[#F4FAF6] text-[#132238] flex flex-col pb-24 select-none">
       
-      {/* 1. TOP HEADER BAR matching 'Kerala Lottery Live' screenshot */}
-      <header className="sticky top-0 z-40 bg-gradient-to-r from-[#C02626] via-[#991B1B] to-[#C02626] text-white shadow-md">
+      {/* 1. TOP BRAND HEADER BAR */}
+      <header className="sticky top-0 z-40 bg-gradient-to-r from-[#00452D] via-[#006B3C] to-[#00452D] text-white shadow-md border-b border-[#13B968]/30">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
           
-          {/* Brand Title */}
-          <Link to="/home" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-[#FFC928] text-[#450A0A] font-black flex items-center justify-center text-xs shadow-xs">
-              KL
+          {/* Brand Logo & Title */}
+          <Link to="/home" className="flex items-center gap-2.5 group">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#FFC928] to-[#F59E0B] text-[#00452D] font-black flex items-center justify-center text-sm shadow-md border border-amber-200 group-hover:scale-105 transition-transform">
+              GV
             </div>
-            <h1 className="font-heading font-black text-lg sm:text-xl text-white tracking-tight">
-              Kerala Lottery Live
-            </h1>
+            <div>
+              <h1 className="font-heading font-black text-lg sm:text-xl text-white tracking-tight leading-none">
+                GREAT VIEW <span className="text-[#FFC928]">LOTTERY</span>
+              </h1>
+              <p className="text-[10px] text-[#D7F3E5] font-semibold tracking-wider uppercase mt-0.5">
+                Play • Win • Be Lucky
+              </p>
+            </div>
           </Link>
 
-          {/* Right Icons: Refresh, Mail, Customer Service */}
+          {/* Header Action Icons */}
           <div className="flex items-center gap-1">
             <button
-              onClick={() => showToast('Refreshed live draws & ticket state.')}
+              onClick={() => showToast('Refreshed live draws & wallet balance.')}
               className="p-2 rounded-full text-white/90 hover:text-white hover:bg-white/10 transition-colors"
               aria-label="Refresh"
             >
@@ -85,7 +91,7 @@ export const HomeScreen: React.FC = () => {
             >
               <Mail className="w-5 h-5" />
               {unreadNotificationCount > 0 && (
-                <span className="absolute top-1 right-1 bg-[#FFC928] text-[#450A0A] text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center border border-[#C02626]">
+                <span className="absolute top-1 right-1 bg-[#FFC928] text-[#00452D] text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
                   {unreadNotificationCount}
                 </span>
               )}
@@ -94,17 +100,25 @@ export const HomeScreen: React.FC = () => {
             <button
               onClick={() => navigate('/support')}
               className="p-2 rounded-full text-white/90 hover:text-white hover:bg-white/10 transition-colors"
-              aria-label="Support"
+              aria-label="Customer Support"
             >
               <Headphones className="w-5 h-5" />
+            </button>
+
+            <button
+              onClick={() => setIsDrawerOpen(true)}
+              className="p-2 rounded-full text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+              aria-label="Open Menu"
+            >
+              <Menu className="w-6 h-6" />
             </button>
           </div>
 
         </div>
       </header>
 
-      {/* User Login/Profile Summary Ribbon */}
-      <div className="bg-[#450A0A] text-white px-4 py-2 border-b border-white/10">
+      {/* 2. USER PROFILE & WALLET SUMMARY RIBBON */}
+      <div className="bg-[#00452D] text-white px-4 py-2 border-b border-[#13B968]/20 shadow-inner">
         <div className="max-w-6xl mx-auto flex items-center justify-between text-xs">
           {isAuthenticated && userProfile ? (
             <div className="flex items-center gap-3">
@@ -114,25 +128,29 @@ export const HomeScreen: React.FC = () => {
                   alt={userProfile.fullName}
                   className="w-6 h-6 rounded-full object-cover border border-[#FFC928]"
                 />
-                <span className="font-bold text-white truncate max-w-[120px]">{userProfile.fullName}</span>
+                <span className="font-bold text-white truncate max-w-[120px] sm:max-w-[200px]">{userProfile.fullName}</span>
               </Link>
-              <span className="text-[#FFC928] font-bold font-mono">₹{walletBalance.toLocaleString('en-IN')}</span>
+              <span className="bg-[#006B3C] text-[#FFC928] font-bold font-mono px-2 py-0.5 rounded-full border border-[#FFC928]/40">
+                ₹{walletBalance.toLocaleString('en-IN')}
+              </span>
             </div>
           ) : (
             <div className="flex items-center gap-2">
-              <span className="text-white/80">Firebase User Auth:</span>
-              <Link to="/login" className="text-[#FFC928] font-extrabold hover:underline">
-                Login / Register
+              <span className="text-white/80">User Account:</span>
+              <Link to="/login" className="text-[#FFC928] font-extrabold hover:underline flex items-center gap-1">
+                <span>Login / Register</span>
+                <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
           )}
 
           <div className="flex items-center gap-3">
-            <Link to="/wallet" className="text-[#FFC928] font-extrabold hover:underline">
-              Wallet
+            <Link to="/wallet" className="text-[#FFC928] font-extrabold hover:underline flex items-center gap-1">
+              <Wallet className="w-3.5 h-3.5" />
+              <span>Wallet</span>
             </Link>
             {isAuthenticated && (
-              <button onClick={() => logout()} className="text-white/80 hover:text-white">
+              <button onClick={() => logout()} className="text-white/80 hover:text-white" title="Sign Out">
                 <LogOut className="w-3.5 h-3.5" />
               </button>
             )}
@@ -140,66 +158,95 @@ export const HomeScreen: React.FC = () => {
         </div>
       </div>
 
-      <main className="max-w-6xl mx-auto w-full px-4 pt-3 space-y-4 flex-1">
+      <main className="max-w-6xl mx-auto w-full px-4 pt-4 space-y-4 flex-1">
         
-        {/* 2. OFFICIAL KERALA STATE LOTTERIES BANNER */}
-        <section className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#991B1B] via-[#C02626] to-[#7F1D1D] text-white p-5 shadow-lg border border-[#FFC928]/40">
-          <div className="flex items-center justify-between mb-2">
-            <span className="bg-[#FFC928] text-[#450A0A] font-black text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-              GOVERNMENT OF KERALA
+        {/* 3. HERO BANNER — GREAT VIEW LOTTERY GRAND BUMPER */}
+        <section className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#00452D] via-[#006B3C] to-[#00452D] text-white p-5 sm:p-6 shadow-xl border-2 border-[#FFC928]">
+          
+          {/* Glowing Ambient Background Elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FFC928]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#13B968]/20 rounded-full blur-2xl pointer-events-none" />
+
+          {/* Official Badge Bar */}
+          <div className="flex items-center justify-between mb-3 relative z-10">
+            <span className="bg-[#FFC928] text-[#00452D] font-black text-[10px] px-3 py-1 rounded-full uppercase tracking-wider shadow-sm flex items-center gap-1">
+              <Sparkles className="w-3 h-3 fill-current text-[#00452D]" />
+              OFFICIAL BUMPER DRAWS
             </span>
-            <span className="text-[10px] text-white/90 font-bold">
-              Official Online Partner
+            <span className="text-[11px] text-[#D7F3E5] font-bold flex items-center gap-1">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#FFC928]" />
+              Instant Digital Payouts
             </span>
           </div>
 
-          <h2 className="font-heading font-black text-xl sm:text-2xl text-white mb-1">
-            Directorate of Kerala State Lotteries
-          </h2>
-          <p className="text-xs text-[#FFC928] font-semibold mb-4">
-            Guaranteed Weekly Bumpers • Instant Digital Settlement
-          </p>
+          {/* Hero Content */}
+          <div className="relative z-10">
+            <h2 className="font-heading font-black text-2xl sm:text-3xl text-white tracking-tight mb-1">
+              GREAT VIEW <span className="text-[#FFC928]">GRAND BUMPER</span>
+            </h2>
+            <p className="text-xs sm:text-sm text-[#FFC928] font-bold mb-4 flex items-center gap-1.5">
+              <span>🏆 Jackpot Prize: ₹ 25 Crores</span>
+              <span className="text-white/50">•</span>
+              <span>100% Guaranteed View Winners</span>
+            </p>
 
-          <div className="flex items-center justify-between">
-            <button
-              onClick={() => navigate('/draws')}
-              className="bg-[#FFC928] hover:bg-yellow-400 text-[#450A0A] font-black text-xs py-2.5 px-5 rounded-xl shadow-md flex items-center gap-2 transition-transform active:scale-95"
-            >
-              <span>Explore Kerala Draws</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+            {/* Floating Lucky Balls Preview */}
+            <div className="flex items-center gap-2 mb-5">
+              <span className="text-xs text-white/80 font-bold mr-1">Lucky Draw Balls:</span>
+              {['17', '34', '88', '92'].map((ball, idx) => (
+                <div
+                  key={idx}
+                  className="w-8 h-8 rounded-full bg-gradient-to-b from-[#FFC928] to-[#F59E0B] text-[#00452D] font-black text-xs flex items-center justify-center shadow-md border border-white transform hover:scale-110 transition-transform"
+                >
+                  {ball}
+                </div>
+              ))}
+            </div>
 
-            <div className="flex items-center gap-1 text-xl">
-              <span>🎟️</span>
-              <span>🐘</span>
-              <span>✨</span>
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => navigate('/draws')}
+                className="bg-[#FFC928] hover:bg-yellow-400 text-[#00452D] font-black text-xs py-3 px-6 rounded-2xl shadow-lg flex items-center gap-2 transition-transform active:scale-95"
+              >
+                <span>Explore Bumper Draws</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+
+              <button
+                onClick={() => navigate('/draws?tab=results')}
+                className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-3 px-5 rounded-2xl border border-[#D7F3E5]/30 backdrop-blur-xs flex items-center gap-1.5 transition-all"
+              >
+                <Trophy className="w-4 h-4 text-[#FFC928]" />
+                <span>Today's Results</span>
+              </button>
             </div>
           </div>
         </section>
 
-        {/* 3. LIVE WINNER TICKER BAR */}
-        <section className="bg-white rounded-2xl p-2.5 px-3.5 border border-[#D7F3E5] shadow-xs flex items-center gap-3 text-xs overflow-hidden">
-          <span className="bg-gradient-to-r from-[#FFC928] to-[#F59E0B] text-[#450A0A] font-black text-[10px] px-2 py-0.5 rounded-md shrink-0 flex items-center gap-1">
+        {/* 4. LIVE WINNER TICKER BAR */}
+        <section className="bg-white rounded-2xl p-3 px-4 border border-[#D7F3E5] shadow-xs flex items-center gap-3 text-xs overflow-hidden">
+          <span className="bg-gradient-to-r from-[#FFC928] to-[#F59E0B] text-[#00452D] font-black text-[10px] px-2.5 py-1 rounded-md shrink-0 flex items-center gap-1 shadow-2xs">
             🏆 Winner:
           </span>
           <div className="flex-1 font-semibold text-[#132238] truncate transition-all duration-300">
-            <span className="font-bold text-[#C02626]">{currentWinner.userMasked}</span> Won{' '}
+            <span className="font-bold text-[#006B3C]">{currentWinner.userMasked}</span> Won{' '}
             <span className="font-mono font-extrabold text-[#006B3C]">{currentWinner.amount}</span> in{' '}
-            <span className="text-slate-600 font-bold">{currentWinner.gameName}</span>
+            <span className="text-slate-700 font-bold">{currentWinner.gameName}</span>
           </div>
         </section>
 
-        {/* 4. QUICK ACTION GRID (4 Round Badges as in Screenshot) */}
+        {/* 5. QUICK ACTION GRID */}
         <section className="bg-white rounded-3xl p-4 border border-[#D7F3E5] shadow-xs">
           <div className="grid grid-cols-4 gap-2 text-center">
             
-            {/* Check In */}
+            {/* Daily Check In */}
             <button
               onClick={() => setIsCheckInOpen(true)}
               className="flex flex-col items-center gap-1.5 group focus:outline-hidden"
             >
-              <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#FFC928] to-[#F59E0B] text-[#450A0A] flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform border border-amber-300">
-                <Calendar className="w-6 h-6 text-[#450A0A]" />
+              <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#FFC928] to-[#F59E0B] text-[#00452D] flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform border border-amber-300">
+                <Calendar className="w-6 h-6 text-[#00452D]" />
               </div>
               <span className="font-bold text-xs text-[#132238]">Check In</span>
             </button>
@@ -209,30 +256,30 @@ export const HomeScreen: React.FC = () => {
               onClick={() => setIsLuckySpinOpen(true)}
               className="flex flex-col items-center gap-1.5 group focus:outline-hidden"
             >
-              <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#C02626] to-[#EF4444] text-white flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform border border-red-300">
+              <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#006B3C] to-[#13B968] text-white flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform border border-emerald-300">
                 🎡
               </div>
               <span className="font-bold text-xs text-[#132238]">Lucky Spin</span>
             </button>
 
-            {/* Result */}
+            {/* Draw Results */}
             <button
               onClick={() => navigate('/draws?tab=results')}
               className="flex flex-col items-center gap-1.5 group focus:outline-hidden"
             >
-              <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#13B968] to-[#006B3C] text-white flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform border border-emerald-300">
-                <Trophy className="w-6 h-6 text-white" />
+              <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#00452D] to-[#006B3C] text-[#FFC928] flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform border border-emerald-400">
+                <Trophy className="w-6 h-6 text-[#FFC928]" />
               </div>
               <span className="font-bold text-xs text-[#132238]">Result</span>
             </button>
 
-            {/* Deposit */}
+            {/* Deposit Funds */}
             <button
               onClick={() => navigate('/add-money')}
               className="flex flex-col items-center gap-1.5 group focus:outline-hidden"
             >
-              <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#2563EB] to-[#3B82F6] text-white flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform border border-blue-300">
-                <Wallet className="w-6 h-6 text-white" />
+              <div className="w-13 h-13 rounded-2xl bg-gradient-to-tr from-[#FFC928] via-[#F59E0B] to-[#FFC928] text-[#00452D] flex items-center justify-center font-black text-xl shadow-md group-hover:scale-105 transition-transform border border-amber-400">
+                <Wallet className="w-6 h-6 text-[#00452D]" />
               </div>
               <span className="font-bold text-xs text-[#132238]">Deposit</span>
             </button>
@@ -240,50 +287,50 @@ export const HomeScreen: React.FC = () => {
           </div>
         </section>
 
-        {/* 5. VIP FREE KERALA TICKETS PROMO BANNER */}
-        <section className="bg-gradient-to-r from-[#C02626] via-[#DC2626] to-[#991B1B] text-white rounded-3xl p-5 shadow-lg border-2 border-[#FFC928] relative overflow-hidden">
+        {/* 6. VIP FREE WEEKLY TICKET PROMO BANNER */}
+        <section className="bg-gradient-to-r from-[#00452D] via-[#006B3C] to-[#00452D] text-white rounded-3xl p-5 shadow-lg border-2 border-[#FFC928] relative overflow-hidden">
           <div className="flex items-center justify-between mb-1">
             <span className="bg-white/20 backdrop-blur-xs text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full uppercase">
               VIP 1 Can Receive 1 Ticket Every Week
             </span>
-            <span className="bg-[#FFC928] text-[#450A0A] text-[10px] font-black px-2 py-0.5 rounded-full">
-              12 Crores
+            <span className="bg-[#FFC928] text-[#00452D] text-[10px] font-black px-2 py-0.5 rounded-full">
+              ₹25 Crores
             </span>
           </div>
 
           <h3 className="font-heading font-black text-xl sm:text-2xl text-[#FFC928] tracking-tight">
-            FREE KERALA TICKETS
+            FREE GREAT VIEW TICKET
           </h3>
 
           <div className="flex items-center justify-between mt-3">
             <div className="text-[11px] text-white/90">
               <span>Expires after: </span>
-              <span className="font-mono font-black bg-black/40 px-2 py-1 rounded-md text-[#FFC928] border border-white/20">
+              <span className="font-mono font-black bg-black/40 px-2.5 py-1 rounded-md text-[#FFC928] border border-white/20">
                 00 : 08 : 57
               </span>
             </div>
 
             <button
               onClick={() => claimRewardOffer('OFFER-1')}
-              className="bg-[#FFC928] hover:bg-yellow-400 text-[#450A0A] font-black text-xs py-2 px-4 rounded-xl shadow-md transition-transform active:scale-95"
+              className="bg-[#FFC928] hover:bg-yellow-400 text-[#00452D] font-black text-xs py-2 px-4 rounded-xl shadow-md transition-transform active:scale-95"
             >
               Claim Ticket
             </button>
           </div>
         </section>
 
-        {/* 6. KERALA LOTTERIES SECTION */}
+        {/* 7. GREAT VIEW BUMPER DRAWS SECTION */}
         <section className="space-y-3">
           <div className="flex items-center justify-between">
             <h3 className="font-heading font-black text-lg text-[#132238]">
-              Kerala Lotteries
+              Great View Bumper Draws
             </h3>
             <Link to="/draws" className="text-xs font-bold text-[#006B3C] hover:underline flex items-center gap-0.5">
-              About Kerala &gt;
+              <span>View All Draws &gt;</span>
             </Link>
           </div>
 
-          {/* Horizontal Scroll / Grid Cards */}
+          {/* Cards Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {draws.map((draw) => (
               <div
@@ -292,7 +339,7 @@ export const HomeScreen: React.FC = () => {
                 className="bg-white rounded-2xl border border-[#D7F3E5] shadow-xs hover:shadow-md transition-all cursor-pointer overflow-hidden p-3.5 relative flex flex-col justify-between"
               >
                 <div className={`bg-gradient-to-r ${draw.bannerGradient} text-white p-3 rounded-xl mb-3 relative`}>
-                  <span className="absolute top-2 right-2 bg-[#FFC928] text-[#450A0A] text-[10px] font-black px-2 py-0.5 rounded-full">
+                  <span className="absolute top-2 right-2 bg-[#FFC928] text-[#00452D] text-[10px] font-black px-2 py-0.5 rounded-full">
                     {draw.badgeTag}
                   </span>
                   <h4 className="font-heading font-black text-base leading-tight">{draw.title}</h4>
@@ -304,7 +351,7 @@ export const HomeScreen: React.FC = () => {
                     <Clock className="w-3.5 h-3.5 text-[#006B3C]" />
                     {draw.closingTimeStr}
                   </span>
-                  <button className="bg-[#006B3C] text-white font-bold text-[11px] px-3 py-1 rounded-lg">
+                  <button className="bg-[#006B3C] hover:bg-[#00452D] text-white font-bold text-[11px] px-3 py-1.5 rounded-lg shadow-xs transition-colors">
                     Buy Ticket
                   </button>
                 </div>
@@ -313,17 +360,17 @@ export const HomeScreen: React.FC = () => {
           </div>
         </section>
 
-        {/* 7. MOST POPULAR SECTION */}
+        {/* 8. MOST POPULAR MULTIPLIER GAMES */}
         <section className="space-y-3 pt-2">
           <h3 className="font-heading font-black text-lg text-[#132238]">
-            Most Popular
+            Most Popular Games
           </h3>
 
           <div className="grid grid-cols-3 gap-2.5">
             {[
               { title: '500 Fortune Garuda', tag: '500X', bg: 'from-[#B45309] to-[#F59E0B]', emoji: '🦅' },
-              { title: '1000X JILI Cash', tag: '1000X', bg: 'from-[#047857] to-[#10B981]', emoji: '💵' },
-              { title: 'XXXTREME Roulette', tag: '2000X', bg: 'from-[#7F1D1D] to-[#EF4444]', emoji: '🎰' }
+              { title: '1000X JILI Cash', tag: '1000X', bg: 'from-[#00452D] to-[#006B3C]', emoji: '💵' },
+              { title: 'XXXTREME Roulette', tag: '2000X', bg: 'from-[#006B3C] to-[#13B968]', emoji: '🎰' }
             ].map((game, idx) => (
               <div
                 key={idx}
@@ -344,8 +391,11 @@ export const HomeScreen: React.FC = () => {
 
       </main>
 
-      {/* Floating Deposit Treasure Chest Button */}
+      {/* Floating Deposit Button */}
       <FloatingDepositButton />
+
+      {/* Side Drawer Component */}
+      <SideDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
 
       {/* Modals */}
       <CheckInModal isOpen={isCheckInOpen} onClose={() => setIsCheckInOpen(false)} />

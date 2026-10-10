@@ -37,11 +37,11 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({ isOpen, onClose }) =
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-in fade-in duration-200 select-none">
       <div className="bg-white rounded-3xl max-w-sm w-full p-5 shadow-2xl border-2 border-[#FFC928] relative overflow-hidden space-y-4">
         
         {/* Top Header */}
-        <div className="bg-gradient-to-r from-[#C02626] to-[#991B1B] text-white p-4 rounded-2xl relative">
+        <div className="bg-gradient-to-r from-[#00452D] via-[#006B3C] to-[#00452D] text-white p-4 rounded-2xl relative">
           <button
             onClick={onClose}
             className="absolute top-3 right-3 text-white/80 hover:text-white bg-black/20 p-1 rounded-full"
@@ -54,7 +54,7 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({ isOpen, onClose }) =
             <Calendar className="w-6 h-6 text-[#FFC928]" />
             <h3 className="font-heading font-black text-lg text-white">Daily Check-In</h3>
           </div>
-          <p className="text-xs text-white/90">Check in daily to earn free wallet cash rewards!</p>
+          <p className="text-xs text-[#D7F3E5]">Check in daily to earn free wallet cash rewards!</p>
         </div>
 
         {/* Rewards Grid */}
@@ -65,7 +65,7 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({ isOpen, onClose }) =
               <div
                 key={item.day}
                 className={`p-2.5 rounded-2xl border text-center relative flex flex-col items-center justify-center ${
-                  item.isBumper ? 'col-span-2 bg-gradient-to-r from-[#FFC928] to-[#F59E0B] text-[#450A0A] border-amber-500 font-bold' :
+                  item.isBumper ? 'col-span-2 bg-gradient-to-r from-[#FFC928] to-[#F59E0B] text-[#00452D] border-amber-500 font-bold' :
                   isCompleted ? 'bg-[#E8FFF4] border-[#13B968] text-[#006B3C]' : 'bg-[#F4FAF6] border-slate-200 text-[#132238]'
                 }`}
               >
@@ -85,10 +85,10 @@ export const CheckInModal: React.FC<CheckInModalProps> = ({ isOpen, onClose }) =
         <button
           onClick={handleClaim}
           disabled={isAlreadyClaimedToday}
-          className={`w-full py-3 px-4 rounded-2xl text-xs font-black shadow-md transition-transform active:scale-98 flex items-center justify-center gap-2 ${
+          className={`w-full py-3.5 px-4 rounded-2xl text-xs font-black shadow-md transition-transform active:scale-98 flex items-center justify-center gap-2 ${
             isAlreadyClaimedToday
               ? 'bg-slate-200 text-[#64748B] cursor-not-allowed'
-              : 'bg-[#C02626] hover:bg-[#991B1B] text-white'
+              : 'bg-[#006B3C] hover:bg-[#00452D] text-white'
           }`}
         >
           {isAlreadyClaimedToday ? (

@@ -112,7 +112,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [notifications, setNotifications] = useState<DemoNotification[]>([
     {
       id: 'NOTIF-1',
-      title: 'Welcome to Kerala Lottery Live!',
+      title: 'Welcome to Great View Lottery!',
       message: 'Explore live official bumper draws, daily check-in rewards, and lucky spins.',
       date: 'Just now',
       read: false,
@@ -145,9 +145,9 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
           if (!snap.exists()) {
             const newProfile: UserProfile = {
               uid: currUser.uid,
-              fullName: currUser.displayName || 'Kerala Lottery Player',
+              fullName: currUser.displayName || 'Great View Player',
               mobile: '+91 98765 43210',
-              email: currUser.email || 'player@keralalottery.live',
+              email: currUser.email || 'player@greatviewlottery.com',
               avatarUrl: currUser.photoURL || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=300',
               walletBalance: 1500,
               vipLevel: 1,
@@ -269,7 +269,7 @@ export const DemoProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = async () => {
     await signOut(auth);
     setUserProfile(null);
-    showToast('Signed out of Kerala Lottery Live.', 'info');
+    showToast('Signed out of Great View Lottery.', 'info');
   };
 
   const updateProfileData = async (fullName: string, mobile: string) => {

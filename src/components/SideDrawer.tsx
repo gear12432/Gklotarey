@@ -50,10 +50,10 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
 
   const menuSections = [
     {
-      title: 'Kerala Lottery & Games',
+      title: 'Great View Draws & Games',
       items: [
-        { label: 'Home Live', path: '/home', icon: Home },
-        { label: 'Kerala Draws & Tickets', path: '/draws', icon: Ticket },
+        { label: 'Home Portal', path: '/home', icon: Home },
+        { label: 'All Bumper Draws', path: '/draws', icon: Ticket },
         { label: 'My Tickets', path: '/my-tickets', icon: Ticket },
         { label: 'Active Tickets', path: '/my-tickets?status=active', icon: Clock },
         { label: 'Draw Results', path: '/draws?tab=results', icon: Trophy },
@@ -73,7 +73,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
     {
       title: 'Help & Policies',
       items: [
-        { label: 'Help & Customer Care', path: '/support', icon: HelpCircle },
+        { label: 'Help & Customer Support', path: '/support', icon: HelpCircle },
         { label: 'Terms & Conditions', path: '/terms', icon: FileText },
         { label: 'Privacy Policy', path: '/privacy', icon: ShieldCheck },
         { label: 'Responsible Play', path: '/responsible-play', icon: Heart },
@@ -82,7 +82,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex">
+    <div className="fixed inset-0 z-50 flex select-none">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
@@ -94,7 +94,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
       <div className="relative w-full max-w-xs sm:max-w-sm bg-white h-full shadow-2xl flex flex-col z-10 overflow-hidden animate-in slide-in-from-left duration-200">
         
         {/* Drawer Header */}
-        <div className="bg-gradient-to-r from-[#C02626] via-[#991B1B] to-[#C02626] text-white p-5 relative">
+        <div className="bg-gradient-to-r from-[#00452D] via-[#006B3C] to-[#00452D] text-white p-5 relative border-b border-[#13B968]/30">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-1.5 rounded-full transition-colors"
@@ -114,12 +114,12 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
             />
             <div className="flex-1 min-w-0">
               <h3 className="font-heading font-extrabold text-base text-white truncate">
-                {userProfile?.fullName || 'Kerala Player'}
+                {userProfile?.fullName || 'Great View Player'}
               </h3>
               <p className="text-xs text-white/80 truncate">
-                {userProfile?.email || 'player@keralalottery.live'}
+                {userProfile?.email || 'player@greatviewlottery.com'}
               </p>
-              <div className="inline-flex items-center gap-1 text-[10px] font-black text-[#450A0A] bg-[#FFC928] px-2 py-0.5 rounded-full mt-1">
+              <div className="inline-flex items-center gap-1 text-[10px] font-black text-[#00452D] bg-[#FFC928] px-2.5 py-0.5 rounded-full mt-1.5 shadow-xs">
                 <Sparkles className="w-2.5 h-2.5 fill-current" />
                 VIP {userProfile?.vipLevel || 1} PLAYER
               </div>
@@ -153,7 +153,7 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
                         <span>{item.label}</span>
                       </div>
                       {item.badge && (
-                        <span className="bg-[#DC2626] text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full">
+                        <span className="bg-[#FFC928] text-[#00452D] text-[10px] font-extrabold px-1.5 py-0.2 rounded-full">
                           {item.badge}
                         </span>
                       )}
@@ -168,17 +168,17 @@ export const SideDrawer: React.FC<SideDrawerProps> = ({ isOpen, onClose }) => {
           <div className="pt-2 border-t border-[#D7F3E5]">
             <button
               onClick={handleLogout}
-              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-[#DC2626] hover:bg-red-50 transition-colors"
+              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold text-[#C02626] hover:bg-red-50 transition-colors"
             >
               <LogOut className="w-4 h-4" />
-              <span>Logout Firebase Account</span>
+              <span>Sign Out Account</span>
             </button>
           </div>
         </div>
 
         {/* Drawer Footer */}
         <div className="p-3 bg-slate-50 border-t border-[#D7F3E5] text-center">
-          <p className="text-[10px] text-[#64748B] font-bold">KERALA LOTTERY LIVE v3.0 (Firebase Integrated)</p>
+          <p className="text-[10px] text-[#64748B] font-bold">GREAT VIEW LOTTERY v3.0 (Official Customer App)</p>
         </div>
 
       </div>

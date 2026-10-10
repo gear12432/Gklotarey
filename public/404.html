@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Great View Lottery — Play • Win • Be Lucky</title>
+    <script type="text/javascript">
+      // GitHub Pages Single Page App Redirect Fallback
+      // Preserves hash and path routes on page refresh
+      var segmentCount = 1;
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + segmentCount).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(segmentCount).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <div style="min-height: 100vh; background-color: #00452D; color: #FFFFFF; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: sans-serif; text-align: center; padding: 20px;">
+        <h1 style="color: #FFC928; margin-bottom: 8px;">GREAT VIEW LOTTERY</h1>
+        <p style="color: #D7F3E5;">Loading application...</p>
+      </div>
+    </div>
+  </body>
+</html>

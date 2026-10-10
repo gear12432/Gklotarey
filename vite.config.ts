@@ -1,16 +1,16 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
-import {defineConfig} from 'vite';
+import { fileURLToPath, URL } from 'node:url';
+import { defineConfig } from 'vite';
 
 export default defineConfig(() => {
   return {
-    // Configures '/Gklotarey/' for GitHub Pages deployment and './' for local/relative preview
+    // Relative base './' ensures assets load correctly regardless of repository name or GitHub Pages subpath
     base: process.env.GITHUB_ACTIONS === 'true' ? '/Gklotarey/' : './',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
     server: {

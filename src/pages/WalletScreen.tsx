@@ -60,34 +60,35 @@ export const WalletScreen: React.FC = () => {
           </div>
 
           <div className="space-y-2.5 pt-1">
-            {recentTransactions.map((txn) => (
-              <div key={txn.id} className="p-3 bg-[#F4FAF6] rounded-2xl flex items-center justify-between text-xs">
-                <div className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${
-                    txn.type === 'add_money' || txn.type === 'reward_bonus'
-                      ? 'bg-emerald-100 text-[#006B3C]'
-                      : 'bg-red-100 text-[#DC2626]'
-                  }`}>
-                    {txn.type === 'add_money' || txn.type === 'reward_bonus' ? (
-                      <ArrowDownLeft className="w-4 h-4" />
-                    ) : (
-                      <ArrowUpRight className="w-4 h-4" />
-                    )}
+            {recentTransactions.map((txn) => {
+              const isCredit = ['add_money', 'reward_bonus', 'deposit', 'checkin_reward', 'spin_reward'].includes(txn.type);
+              return (
+                <div key={txn.id} className="p-3 bg-[#F4FAF6] rounded-2xl flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${
+                      isCredit ? 'bg-emerald-100 text-[#006B3C]' : 'bg-red-100 text-[#DC2626]'
+                    }`}>
+                      {isCredit ? (
+                        <ArrowDownLeft className="w-4 h-4" />
+                      ) : (
+                        <ArrowUpRight className="w-4 h-4" />
+                      )}
+                    </div>
+                    <div>
+                      <p className="font-bold text-[#132238] leading-tight">{txn.description}</p>
+                      <p className="text-[10px] text-[#64748B] mt-0.5">{txn.date}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-bold text-[#132238] leading-tight">{txn.description}</p>
-                    <p className="text-[10px] text-[#64748B] mt-0.5">{txn.date}</p>
-                  </div>
-                </div>
 
-                <div className="text-right font-mono font-bold">
-                  <span className={txn.type === 'add_money' || txn.type === 'reward_bonus' ? 'text-[#006B3C]' : 'text-[#132238]'}>
-                    {txn.type === 'add_money' || txn.type === 'reward_bonus' ? '+' : '-'}₹{txn.amount}
-                  </span>
-                  <span className="block text-[9px] text-[#13B968] font-sans font-bold">SUCCESS</span>
+                  <div className="text-right font-mono font-bold">
+                    <span className={isCredit ? 'text-[#006B3C]' : 'text-[#132238]'}>
+                      {isCredit ? '+' : '-'}₹{txn.amount}
+                    </span>
+                    <span className="block text-[9px] text-[#13B968] font-sans font-bold">SUCCESS</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

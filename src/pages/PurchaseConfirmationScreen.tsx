@@ -97,14 +97,14 @@ export const PurchaseConfirmationScreen: React.FC = () => {
           <button
             onClick={handleConfirmPurchase}
             disabled={isProcessing}
-            className="flex-1 bg-[#C02626] hover:bg-[#991B1B] text-white font-bold py-3.5 px-6 rounded-2xl text-xs shadow-md transition-transform active:scale-98 flex items-center justify-center gap-2 disabled:opacity-60"
+            className="flex-1 bg-[#006B3C] hover:bg-[#00452D] text-white font-bold py-3.5 px-6 rounded-2xl text-xs shadow-md transition-transform active:scale-98 flex items-center justify-center gap-2 disabled:opacity-60"
           >
             {isProcessing ? (
               <span>Confirming Ticket...</span>
             ) : (
               <>
                 <CheckCircle2 className="w-4 h-4 text-[#FFC928]" />
-                <span>Confirm Purchase (Firebase)</span>
+                <span>Confirm Purchase</span>
               </>
             )}
           </button>

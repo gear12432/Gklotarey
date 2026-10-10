@@ -16,8 +16,8 @@ export const TransactionHistoryScreen: React.FC = () => {
       txn.description.toLowerCase().includes(searchTerm.toLowerCase());
 
     if (typeFilter === 'all') return matchesSearch;
-    if (typeFilter === 'credits') return matchesSearch && (txn.type === 'add_money' || txn.type === 'reward_bonus');
-    if (typeFilter === 'debits') return matchesSearch && txn.type === 'ticket_purchase';
+    if (typeFilter === 'credits') return matchesSearch && ['add_money', 'reward_bonus', 'deposit', 'checkin_reward', 'spin_reward'].includes(txn.type);
+    if (typeFilter === 'debits') return matchesSearch && (txn.type === 'ticket_purchase' || txn.type === 'withdrawal');
 
     return matchesSearch;
   });
@@ -66,7 +66,7 @@ export const TransactionHistoryScreen: React.FC = () => {
         {filteredTxns.length > 0 ? (
           <div className="bg-white rounded-3xl border border-[#D7F3E5] p-4 shadow-xs space-y-2.5">
             {filteredTxns.map((txn) => {
-              const isCredit = txn.type === 'add_money' || txn.type === 'reward_bonus';
+              const isCredit = ['add_money', 'reward_bonus', 'deposit', 'checkin_reward', 'spin_reward'].includes(txn.type);
               return (
                 <div
                   key={txn.id}
